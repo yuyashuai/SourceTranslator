@@ -1,0 +1,46 @@
+<idea-plugin>
+  <id>com.yuyashuai.plugin.dictionary</id>
+  <name>SourceTranslator</name>
+  <version>1.0</version>
+  <vendor email="yuyashuai@gmail.com" url="https://github.com/yuyashuai">yuyashuai</vendor>
+
+  <description><![CDATA[
+      双击选中单词，自动翻译.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="139.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+
+    <action id="TranslateSelectedAction" class="TransSelectedAction" text="translate selected words"
+            description="translate selected">
+      <add-to-group group-id="ToolsMenu" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt T"/>
+    </action>
+  </actions>
+
+  <application-components>
+    <component>
+      <implementation-class>DictionaryComponent</implementation-class>
+    </component>
+  </application-components>
+</idea-plugin>
