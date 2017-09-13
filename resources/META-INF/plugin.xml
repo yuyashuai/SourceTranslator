@@ -34,7 +34,7 @@
     <action id="TranslateSelectedAction" class="TransSelectedAction" text="translate selected words"
             description="translate selected">
       <add-to-group group-id="ToolsMenu" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt T"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="alt shift Q"/>
     </action>
   </actions>
 

@@ -28,14 +28,12 @@ public class QueryListener implements SelectionListener, EditorMouseListener {
         Editor editor = editorMouseEvent.getEditor();
         Document document = editor.getDocument();
         if (document.isWritable()) {
-            System.out.println("可以编辑的");
             return;
         }
         String selectedText = editorMouseEvent.getEditor().getSelectionModel().getSelectedText();
         if(TextUtils.isEmpty(selectedText)) return;
         if(selectedText.contains(" ")) return;
         TransManager.getInstance().translate(selectedText,editor);
-        System.out.println("点击： " + selectedText);
     }
 
     @Override

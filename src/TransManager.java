@@ -40,11 +40,8 @@ public class TransManager {
      * @param editor
      */
     public void translate(String text, Editor editor) {
-        //showWaitBalloon(editor);
-        System.out.println("原始：" + text);
         if (TextUtils.isEmpty(text)) return;
         text = text.replaceAll("[^a-z^A-Z^0-9^ ^_^(^)]", "");
-        System.out.println("切分：" + text);
         if (TextUtils.isBlank(text) || text.length() < 2) return;
         if (text.contains(" ")) {
             translateParagraph(text, editor);
@@ -59,7 +56,6 @@ public class TransManager {
             return;
         }
         //驼峰
-
         text = parseWord(text);
         System.out.println("parse后： " + text);
         if (text.contains(" ")) {
@@ -69,30 +65,6 @@ public class TransManager {
         queryWord(text, editor);
 
     }
-    private void showWaitBalloon(Editor editor)
-    {
-        String htmlText="<html lang=\"en\">" +
-                "<head>" +
-                "    <meta charset=\"UTF-8\">" +
-                "</head>" +
-                "<body>" +
-                "<p style=\"line-height: 7px;margin-top: 8px;margin-bottom:8xp\">正在查询...</p>" +
-                "</body>" +
-                "</html>";
-        ApplicationManager.getApplication().invokeLater(() -> {
-            JBPopupFactory jbPopupFactory=JBPopupFactory.getInstance();
-            BalloonBuilder balloonBuilder=jbPopupFactory
-                    .createHtmlTextBalloonBuilder(htmlText,null,new JBColor(new Color(222, 222, 222)
-                            , new Color(77, 77, 77)),null);
-            balloonBuilder.setFadeoutTime(5000);
-            waitBalloon=balloonBuilder.createBalloon();
-
-           // waitBalloon.setBounds(new Rectangle(20,20,20,20));
-            waitBalloon.show(JBPopupFactory.getInstance().guessBestPopupLocation(editor),Balloon.Position.below);
-        });
-
-    }
-
     /**
      * 在大写字母前自动加入空格
      *
@@ -132,7 +104,6 @@ public class TransManager {
      * @param editor
      */
     private void queryWord(String word, Editor editor) {
-        //transByBing(word, editor);
         transByYouDao(word, editor);
     }
 
@@ -143,7 +114,6 @@ public class TransManager {
      */
     private void transByYouDao(String words, Editor editor) {
         final long requestTime = System.currentTimeMillis();
-        System.out.println("translateParagraph：" + words);
         System.out.println("queryWord：" + words);
         String radom = "196890";
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -306,11 +276,7 @@ public class TransManager {
             }
             lastBalloon = balloon;
             balloon.setAnimationEnabled(false);
-            //balloon.show(jbPopupFactory.guessBestPopupLocation(editor), Balloon.Position.below);
-            JComponent jComponent=editor.getComponent();
-            RelativePoint relativePoint =
-                    RelativePoint.fromScreen(jbPopupFactory.guessBestPopupLocation(editor).getScreenPoint());
-            balloon.show(relativePoint,Balloon.Position.below);
+            balloon.show(jbPopupFactory.guessBestPopupLocation(editor), Balloon.Position.below);
         });
 
 
